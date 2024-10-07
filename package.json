@@ -21,8 +21,11 @@
   "license": "ISC",
   "description": "Учебный сайт",
   "dependencies": {
+    "body-parser": "^1.20.3",
+    "bootstrap": "^5.3.3",
     "express": "^4.21.0",
-    "express-handlebars": "^8.0.1"
+    "express-handlebars": "^8.0.1",
+    "multiparty": "^4.2.3"
   },
   "devDependencies": {
     "@openreachtech/eslint-rules-default-jest": "github:openreachtech/eslint-rules-default-jest",

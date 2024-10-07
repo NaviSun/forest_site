@@ -13,7 +13,7 @@ export default [
       "jest/valid-expect": "error",
       
         "jest/require-hook": [
-          "warn",
+          "0",
           {
             "allowedFunctionCalls": ["enableAutoDestroy"]
           }

@@ -1,13 +1,63 @@
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forest Tourism</title>
+    {{{_sections.head}}}
+    <link
+      rel="stylesheet"
+      href="/assets/vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <title>Document</title>
   </head>
   <body>
-    <header>
-      <img src="/img/logo.jpg" height=200 width=200 alt="logo" />
+    <div class="container">
+    <header role="banner">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+          <a href="/">
+            <img src="/img/logo.jpg" height="100" width="100" alt="logo" />
+          </a>
+          <a class="navbar-brand" href="/">Forest Tourism</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarsExample05"
+            aria-controls="navbarsExample05"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarsExample05">
+            <ul class="navbar-nav ml-auto pl-lg-5 pl-0">
+              <li class="nav-item">
+                <a class="nav-link active" href="/">Главная</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">О Нас</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/newsletter-signup">Подписка на
+                  рассылку</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/newsletter">Подписка на рассылку JSON</a>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item cta-btn">
+                <a class="nav-link" href="/contest/vacation-photo">Добавить фото</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
     {{{body}}}
+    {{{_sections.scripts}}}
+    </div>
   </body>
 </html>
