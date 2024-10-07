@@ -9,7 +9,6 @@ import {
   uniq,
   sectionTest,
   serverError,
-  newsLetterSignup,
   newsletterSignupProcess,
   newsLetterSignupThankYou,
   newsletter,
@@ -17,10 +16,16 @@ import {
   vacationPhotoContestProcess,
   vacationPhoto,
   vacationPhotoThankYou,
+  newsLetterSignup,
 } from "./lib/handlers.mjs";
 import * as url from "node:url";
 import bodyParser from "body-parser";
 import multyparty from "multiparty";
+import cookieParser from "cookie-parser";
+import { credentials } from "./lib/config.mjs";
+import session from "express-session";
+import { flashForestTourist } from "./lib/flash.mjs";
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -58,8 +63,17 @@ app.use(
   "/assets/vendor/bootstrap/icons",
   express.static(__dirname + "/node_modules/bootstrap/dist/icons")
 );
+
 // app.use(express.static(__dirname + "/views/contest"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser(credentials.cookieSecret))
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: credentials.cookieSecret,
+}))
+app.use(flashForestTourist)
 app.get("/", home);
 app.get("/about", about);
 app.get("/uniq", uniq);
@@ -67,22 +81,18 @@ app.get("/section-test", sectionTest);
 app.get("/newsletter-signup", newsLetterSignup);
 app.post("/newsletter-signup/process", newsletterSignupProcess);
 app.get("/newsletter-signup-thank-you", newsLetterSignupThankYou);
-app.use(bodyParser.json());
+app.get("/newsletter-archive", newsLetterSignupThankYou);
 app.get("/newsletter", newsletter);
 app.get("/contest/vacation-photo", vacationPhoto);
-app.post("/contest/vacation-photo/process", vacationPhotoContestProcess);
-app.post("/contest/vacation-photo-thank-you", vacationPhotoThankYou);
 app.post("/contest/vacation-photo/:year/:month", (req, res) => {
+  console.log("");
   const form = new multyparty.Form();
   form.parse(req, (err, fields, files) => {
     if (err) return res.status(500).send({ error: err.message });
     vacationPhotoContestProcess(req, res, fields, files);
   });
 });
-app.post("/livesklad", (req, res) => {
-  console.log(req.body);
-  res.status(200).send("OK");
-});
+
 
 // Пользовательская страница 404
 app.use(notFound);
